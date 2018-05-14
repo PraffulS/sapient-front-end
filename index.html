@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="mainapp" ng-controller="maincontroller">
+<head>
+	<title></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+</head>
+<body background="https://i.pinimg.com/originals/51/44/60/5144607d36e4332beb201bec44dcdca7.png">
+<div class="container">
+
+
+
+
+<nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <super><a class="navbar-brand" style="font-family: 'Pacifico', cursive;"><h1>Sapient Games Arena</h1></a></super></super>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+ </nav>
+
+	<div>  
+        <input list="browsers" type="text" placeholder="search by name" ng-model="curPlace" class="inputText">
+  		<datalist id="browsers">
+  		<div ng-repeat="place in list_of_games | filter:curPlace track by $index">
+    	<option value="{{ place }}">
+   		</option>
+   		</div>
+  		</datalist>
+  		<input type="submit" class="btn btn-primary btn-sm" ng-click="show_game()"> 
+    </div> 
+    <center><input type="radio" ng-model="sort1" value="asc" ng-change='check("asc")'><b>Sort by score ascending</b>
+    <input type="radio" ng-model="sort1" value="desc" ng-change='check("desc")'><b>Sort by score descending</b></center>
+
+<br><br>
+<div class="row" ng-show="flag">
+  <div class="col-sm-6" ng-repeat="e in data1">
+  	<div class="card img-fluid" style="width:500px, padding:10px">
+    	<img class="card-img-top" src="http://pngimg.com/uploads/sticky_note/sticky_note_PNG18915.png" alt="Card image" style="width:100%">
+    	<div class="card-img-overlay">
+
+      	<h4 class="card-title" style="width:400px"><br><br><br>{{ e.title }} </h4>
+      	<p class="card-text" style="width:400px">
+     	<ul style="list-style-type: circle;">
+      	<li><b>Link: </b><i class="fa fa-share-alt" aria-hidden="true"></i><a> {{ e.url }} </a></li><br>
+      	<li><b>Platform: </b><i class="fa fa-check-square" aria-hidden="true"></i> {{ e.platform }}</li> <br>
+      	<li><b>Score: </b><i class="fa fa-line-chart" aria-hidden="true"></i> {{ e.score }}</li> <br>
+      	<li><b>Genre: </b><i class="fa fa-comments" aria-hidden="true"></i> {{ e.genre }} </li><br>
+      	<div ng-if="e.editors_choice=='Y'">
+      		<li><b>Editor's choice: </b><i class="fa fa-thumbs-o-up"></i> {{ e.editors_choice }}</li>
+      	</div>
+      	<div ng-if="e.editors_choice=='N'">
+      		<li><b>Editor's choice: </b><i class="fa fa-thumbs-o-down"></i> {{ e.editors_choice }}</li>
+      	</div>
+      	 <br>
+      	 </ul>
+      	</p>
+      	<div class="card-img-bottom" style="width:400px"><b>Released in :</b><i class="fa fa-sign-language" aria-hidden="true"></i> {{ e.release_year }}</div>
+    	</div>
+ 	 </div>
+ 	</div>
+  </div>
+
+  <div class="row" ng-show="flag1">
+  <div class="col-sm-6">
+  	<div class="card img-fluid" style="width:500px, padding:10px">
+    	<img class="card-img-top" src="http://pngimg.com/uploads/sticky_note/sticky_note_PNG18915.png" alt="Card image" style="width:100%">
+    	<div class="card-img-overlay">
+
+      	<h4 class="card-title" style="width:400px"><br><br><br>{{ data2.title }} </h4>
+      	<p class="card-text" style="width:400px">
+     	<ul style="list-style-type: circle;">
+      	<li><b>Link: </b><i class="fa fa-share-alt" aria-hidden="true"></i> <a>{{ data2.url }} </a></li><br>
+      	<li><b>Platform: </b><i class="fa fa-check-square" aria-hidden="true"></i> {{ data2.platform }}</li> <br>
+      	<li><b>Score: </b><i class="fa fa-line-chart" aria-hidden="true"></i> {{ data2.score }}</li> <br>
+      	<li><b>Genre: </b><i class="fa fa-comments" aria-hidden="true"> </i>{{ data2.genre }} </li><br>
+      	<div ng-if="data2.editors_choice=='Y'">
+      		<li><b>Editor's choice: </b><i class="fa fa-thumbs-o-up"></i> {{ data2.editors_choice }}</li>
+      	</div>
+      	<div ng-if="data2.editors_choice=='N'">
+      		<li><b>Editor's choice: </b><i class="fa fa-thumbs-o-down"></i> {{ data2.editors_choice }}</li>
+      	</div> 
+      	<br>
+      	</ul>
+      	</p>
+      	<div class="card-img-bottom" style="width:400px"><b>Released in : </b><i class="fa fa-sign-language" aria-hidden="true"> </i>{{ data2.release_year }}</div>
+    	</div>
+ 	 </div>
+ 	</div>
+  </div>
+</div>
+
+</body>
+<script src="script.js"></script>
+
+<style type="text/css">
+
+	.icon-button {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    border: 0;
+    background: transparent;
+}
+</style>
+</html>
